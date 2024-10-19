@@ -1,0 +1,86 @@
+using System.Reflection.Metadata.Ecma335;
+
+namespace ConsoleApp5
+{
+    class Queue<T>
+    {
+        private T[] arr;
+        private int front;
+        private int rear;
+        private int count;
+        private int capacity;
+
+        public Queue(int size = 10)
+        {
+            arr = new T[size];
+            front = 0;
+            rear = -1;
+            count = 0;
+            capacity = size;
+        }
+
+        public void Enqueue(T item)
+        {
+            if (count < capacity)
+            {
+                rear = (rear + 1) % capacity;
+                arr[rear] = item;
+                count++;
+            }
+            else
+            {
+                Console.WriteLine("Queue is full");
+            }
+        }
+
+        public T Dequeue()
+        {
+            if (count > 0)
+            {
+                T item = arr[front];
+                front = (front + 1) % capacity;
+                count--;
+                return item;
+            }
+            else
+            {
+                Console.WriteLine("Queue is empty");
+                return default(T);
+            }
+        }
+
+        public bool IsEmpty()
+        {
+            return count == 0;
+        }
+
+        public bool IsFull()
+        {
+            return count == capacity;
+        }
+
+        public int Size()
+        {
+            return count;
+        }
+    }
+
+
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Queue<int> q = new Queue<int>(5);
+            q.Enqueue(10);
+            q.Enqueue(20);
+            q.Enqueue(30);
+
+            Console.WriteLine("Dequeued: " + q.Dequeue());
+            Console.WriteLine("Dequeued: " + q.Dequeue());
+
+            q.Enqueue(40);
+            Console.WriteLine("Dequeued: " + q.Dequeue());
+            Console.WriteLine("Dequeued: " + q.Dequeue()); 
+        }
+    }
+}
