@@ -1,0 +1,97 @@
+using System;
+using System.Collections.Generic;
+
+
+public class Question
+{
+    public string QuestionBody { get; set; }
+    public int Mark { get; set; }
+
+    // Constructor
+    public Question(string questionBody, int mark)
+    {
+        QuestionBody = questionBody;
+        Mark = mark;
+    }
+
+    // Override ToString
+    public override string ToString()
+    {
+        return $"{QuestionBody} ({Mark} marks)";
+    }
+}
+
+public class Answer
+{
+    public int Num { get; set; }
+    public string Choice { get; set; }
+
+    // Constructor
+    public Answer(int num, string choice)
+    {
+        Num = num;
+        Choice = choice;
+    }
+
+    // Override ToString
+    public override string ToString()
+    {
+        return $"{Num}. {Choice}";
+    }
+}
+
+
+
+
+public class Program
+{
+    public static void Main(string[] args)
+    {
+        // Create a list of questions
+        List<Question> questions = new List<Question>
+        {
+            new Question("What does OOP stand for?", 10),
+            new Question("What is the capital of France?", 5)
+        };
+
+        // Print the questions
+        Console.WriteLine("Questions:");
+        foreach (var question in questions)
+        {
+            Console.WriteLine(question);
+        }
+
+        // Create answers
+        List<Answer> answers1 = new List<Answer>
+        {
+            new Answer(1, "Object Oriented Programming"),
+            new Answer(2, "Object Of People"),
+            new Answer(3, "Operating Open Programs")
+        };
+
+        List<Answer> answers2 = new List<Answer>
+        {
+            new Answer(1, "Paris"),
+            new Answer(2, "London"),
+            new Answer(3, "Berlin")
+        };
+
+        // Create a dictionary for the exam
+        Dictionary<Question, List<Answer>> exam = new Dictionary<Question, List<Answer>>
+        {
+            { questions[0], answers1 },
+            { questions[1], answers2 }
+        };
+
+        // Print the exam
+        Console.WriteLine("\nExam:");
+        foreach (var entry in exam)
+        {
+            Console.WriteLine(entry.Key);
+            foreach (var answer in entry.Value)
+            {
+                Console.WriteLine(answer);
+            }
+        }
+    }
+}
